@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  howtodev-database:
+    container_name: howtodev-database
+    image: postgres:12.1-alpine
+    ports:
+      - 5433:5432
+    restart: always
+    volumes:
+      - howtodev-database:/var/lib/postgresql/data
+
+  howtodev-server:
+    build:
+      context: ./howtodev-server
+    command: runserver
+    container_name: howtodev-server
+    depends_on:
+      - howtodev-database
+    env_file:
+      ./howtodev-server/.env
+    ports:
+      - 8001:8000
+    volumes:
+      - ./howtodev-server:/usr/src/app/howtodev-server
+
+volumes:
+  howtodev-database:
