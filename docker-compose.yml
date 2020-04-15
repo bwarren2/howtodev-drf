@@ -14,7 +14,7 @@ services:
   howtodev-server:
     build:
       context: ./howtodev-server
-    command: runserver
+    command: python howtodev/manage.py runserver 0:8000
     container_name: howtodev-server
     depends_on:
       - howtodev-database
