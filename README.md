@@ -24,3 +24,8 @@ Migrate the DB:
 `python howtodev/manage.py migrate`
 
 See if it runs at `http://127.0.0.1:8001/`!
+
+## Optional setup
+
+Create a superuser if you want one:
+`python howtodev/manage.py createsuperuser` within the server
