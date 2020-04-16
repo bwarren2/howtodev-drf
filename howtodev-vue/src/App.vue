@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PlannerPage from './pages/PlannerPage.vue'
 
 export default {
   name: 'App',
