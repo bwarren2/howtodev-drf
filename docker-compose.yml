@@ -1,7 +1,6 @@
-version: '3.7'
+version: "3.7"
 
 services:
-
   howtodev-database:
     container_name: howtodev-database
     image: postgres:12.1-alpine
@@ -14,16 +13,30 @@ services:
   howtodev-server:
     build:
       context: ./howtodev-server
-    command: python howtodev/manage.py runserver 0:8000
+    command: python howtodev/manage.py runserver 0:8080
     container_name: howtodev-server
     depends_on:
       - howtodev-database
-    env_file:
-      ./howtodev-server/.env
+    env_file: ./howtodev-server/.env
     ports:
-      - 8001:8000
+      - 8080
     volumes:
       - ./howtodev-server:/usr/src/app/howtodev-server
+
+  howtodev-vue:
+    build:
+      context: ./howtodev-vue
+    command: vue ui -H 0.0.0.0 -p 8000
+    container_name: howtodev-vue
+    depends_on:
+      - howtodev-server
+    # env_file: ./howtodev-server/.env
+    ports:
+      - "8002:8002"
+      - "8001:8001"
+      - "8000:8000"
+    volumes:
+      - ./howtodev-vue:/usr/src/app/
 
 volumes:
   howtodev-database:
