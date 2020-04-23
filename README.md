@@ -35,3 +35,7 @@ See if it runs at `http://127.0.0.1:8001/`!
 
 Create a superuser if you want one:
 `python howtodev/manage.py createsuperuser` within the server
+
+## Explanation
+
+I wrote about why I made this [on my blog](https://bwarren2.github.io/drf-vue.html).
