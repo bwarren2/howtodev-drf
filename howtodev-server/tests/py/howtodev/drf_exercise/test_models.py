@@ -1,6 +1,5 @@
-# from drf_exercise import models
+from drf_exercise import models
 
 
 def test_model():
-    # assert models.Employee(name='Ben').name == 'Ben'
-    pass
+    assert models.Employee(name='Ben').name == 'Ben'

@@ -2,6 +2,8 @@
 omit =
   howtodev/howtodev/asgi.py
   howtodev/howtodev/wsgi.py
+  howtodev/manage.py
+  */migrations/*
 [report]
 show_missing = True
 fail_under = 50
