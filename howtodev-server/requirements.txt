@@ -7,3 +7,10 @@ psycopg2-binary==2.8.4
 pytest-asyncio==0.10.0
 pytest-django==3.8.0
 django-cors-headers
+pytest==5.4.1
+pytest-asyncio==0.10.0
+pytest-cov==2.8.1
+pytest-django==3.8.0
+pytest-factoryboy==2.0.3
+pytest-pythonpath==0.7.3
+pytest-sugar==0.9.3

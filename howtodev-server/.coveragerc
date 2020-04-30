@@ -1,0 +1,7 @@
+[run]
+omit =
+  howtodev/howtodev/asgi.py
+  howtodev/howtodev/wsgi.py
+[report]
+show_missing = True
+fail_under = 50
