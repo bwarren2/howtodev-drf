@@ -14,3 +14,4 @@ pytest-django==3.8.0
 pytest-factoryboy==2.0.3
 pytest-pythonpath==0.7.3
 pytest-sugar==0.9.3
+pytest-testdox==1.2.1

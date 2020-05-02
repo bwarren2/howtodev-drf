@@ -3,6 +3,7 @@ omit =
   howtodev/howtodev/asgi.py
   howtodev/howtodev/wsgi.py
   howtodev/manage.py
+  howtodev/*/apps.py
   */migrations/*
 [report]
 show_missing = True

@@ -16,6 +16,12 @@ Bring it up, then
 
 `docker exec -it howtodev-database bash`
 
+To get into a container, and
+
+`psql -U postgres`
+
+to get a postgres shell.
+
 Create the DB:
 `createdb -U postgres howtodev`
 
@@ -36,6 +42,8 @@ See if it runs at `http://127.0.0.1:8001/`!
 Create a superuser if you want one:
 `python howtodev/manage.py createsuperuser` within the server
 
-## Explanation
+## Tests
 
-I wrote about why I made this [on my blog](https://bwarren2.github.io/drf-vue.html).
+Run with `pytest`
+
+For the challenge questions, run with `py.test -p no:sugar` to see the testdox-style expectations.
