@@ -37,7 +37,7 @@ class TestAPIExists():  # pylint: disable=missing-class-docstring
         try:
             from drf_exercise import apis  # pylint: disable=unused-import, import-outside-toplevel, redefined-outer-name
         except ImportError:
-            pytest.fail("You need to make an api.py file.")
+            pytest.fail("You need to make an `apis.py` file.")
 
     @pytest.mark.run(order=6)
     @pytest.mark.it('has a ModelViewSet for Employee')
@@ -45,7 +45,7 @@ class TestAPIExists():  # pylint: disable=missing-class-docstring
         assert apis.EmployeeModelViewSet
 
     @pytest.mark.run(order=7)
-    @pytest.mark.it('has a urls file')
+    @pytest.mark.it('has a `urls.py` file')
     def test_urlspy_exists(self):  # pylint: disable=missing-function-docstring
 
         try:
@@ -112,3 +112,23 @@ class TestAPIWorks():  # pylint: disable=missing-class-docstring
         api_client.force_authenticate(user)
         response = api_client.get(reverse('employee-list')).json()
         assert 'count' in response and 'next' in response and 'previous' in response
+
+    @pytest.mark.run(order=15)
+    @pytest.mark.it('supports filtering on name')
+    def test_employee_pagination(self, user, api_client):  # pylint: disable=missing-function-docstring
+        models.Employee.objects.create(name='Ben')
+        models.Employee.objects.create(name='John')
+        api_client.force_authenticate(user)
+        response = api_client.get(f"{reverse('employee-list')}?name=Ben").json()
+        assert len(response['results']) == 1
+
+
+@pytest.mark.django_db(transaction=True, reset_sequences=True)
+@pytest.mark.describe('`Snack`s endpoint and relationships')
+class TestRelationshipsWork():  # pylint: disable=missing-class-docstring
+
+    @pytest.mark.run(order=16)
+    @pytest.mark.it('can be hit')
+    def test_resolve_request(self, user, api_client, employee):  # pylint: disable=missing-function-docstring
+        api_client.force_authenticate(user)
+        assert api_client.get('/api/v1/snacks/').status_code == 200
