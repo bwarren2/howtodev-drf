@@ -2,6 +2,8 @@
 
 import rest_framework
 import pytest
+from django.urls import reverse
+
 try:
     from drf_exercise import urls, apis, models
 except ImportError:
@@ -77,11 +79,10 @@ class TestAPIWorks():  # pylint: disable=missing-class-docstring
     @pytest.mark.it('returns a list of employees')
     def test_resolve_employee_list(self, api_client, employee):  # pylint: disable=missing-function-docstring
         models.Employee.objects.create(name='Ben')
-        assert api_client.get('/api/v1/employees/').json() == [{'name': 'John'}, {'name': 'Ben'}]
+        assert api_client.get(reverse('employee-list')).json() == [{'name': 'John'}, {'name': 'Ben'}]
 
     @pytest.mark.run(order=12)
     @pytest.mark.django_db(transaction=True, reset_sequences=True)
     @pytest.mark.it('returns a specific employee')
     def test_resolve_employee_detail(self, api_client, employee):  # pylint: disable=missing-function-docstring
-        print(api_client.get('/api/v1/employees/1/').json())
-        assert api_client.get('/api/v1/employees/1/').json() == {'name': 'John'}
+        assert api_client.get(reverse('employee-detail', args=(1,))).json() == {'name': 'John'}
