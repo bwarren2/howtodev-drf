@@ -10,13 +10,29 @@ class TeamSerializer(serializers.ModelSerializer):  # pylint: disable=missing-cl
         fields = ('name',)
 
 
-class SnackSerializer(serializers.ModelSerializer):  # pylint: disable=missing-class-docstring
+class BaseSnackSerializer(serializers.ModelSerializer):  # pylint: disable=missing-class-docstring
     class Meta:  # pylint: disable=missing-class-docstring
         model = models.Snack
-        fields = ('name',)
+        fields = ('name', )
+
+
+class BaseEmployeeSerializer(serializers.ModelSerializer):  # pylint: disable=missing-class-docstring
+    class Meta:  # pylint: disable=missing-class-docstring
+        model = models.Employee
+        fields = ('name', )
 
 
 class EmployeeSerializer(serializers.ModelSerializer):  # pylint: disable=missing-class-docstring
+    snacks = BaseSnackSerializer(many=True, source='snack_set')
+
     class Meta:  # pylint: disable=missing-class-docstring
         model = models.Employee
-        fields = ('name',)
+        fields = ('name', 'snacks')
+
+
+class SnackSerializer(serializers.ModelSerializer):  # pylint: disable=missing-class-docstring
+    owner_data = BaseEmployeeSerializer(source='owner')
+
+    class Meta:  # pylint: disable=missing-class-docstring
+        model = models.Snack
+        fields = ('name', 'owner', 'owner_data')

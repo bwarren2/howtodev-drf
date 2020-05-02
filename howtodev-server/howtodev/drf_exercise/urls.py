@@ -6,6 +6,7 @@ from . import apis
 
 router = routers.DefaultRouter()
 router.register('employees', apis.EmployeeModelViewSet)
+router.register('snacks', apis.SnackModelViewSet)
 
 urlpatterns = [
     path('', include(router.urls))
