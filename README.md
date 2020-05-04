@@ -4,9 +4,9 @@ Work through a series of tests setting up example DRF APIs, culminating in autog
 
 Run the tests with:
 
-`docker-compose up -d`
-`docker exec -it howtodev-database bash`
-`pytest`
+    docker-compose up -d
+    docker exec -it howtodev-database bash
+    pytest
 
 The tests:
 
