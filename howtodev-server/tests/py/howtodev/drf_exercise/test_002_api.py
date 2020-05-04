@@ -81,7 +81,7 @@ class TestAPIExists():  # pylint: disable=missing-class-docstring
         try:
             from drf_exercise import apis  # pylint: disable=unused-import, import-outside-toplevel, redefined-outer-name
         except ImportError:
-            pytest.fail("You need to make an `apis.py` file.")
+            pytest.fail("You need to make an `apis.py` file in drf_exercise/.")
 
     @pytest.mark.run(order=6)
     @pytest.mark.it('has a ModelViewSet named EmployeeModelViewSet for Employee in apis.py')
@@ -90,16 +90,16 @@ class TestAPIExists():  # pylint: disable=missing-class-docstring
             assert apis.EmployeeModelViewSet
             assert issubclass(apis.EmployeeModelViewSet, rest_framework.viewsets.ModelViewSet)
         except AttributeError:
-            pytest.fail("You need a ModelViewSet named EmployeeModelViewSet in apis.py")
+            pytest.fail("You need a ModelViewSet named EmployeeModelViewSet in apis.py in drf_exercise/")
 
     @pytest.mark.run(order=7)
-    @pytest.mark.it('has a `urls.py` file')
+    @pytest.mark.it('has a `urls.py` file in drf_exercise/.')
     def test_urlspy_exists(self):  # pylint: disable=missing-function-docstring
 
         try:
             from drf_exercise import urls  # pylint: disable=unused-import, import-outside-toplevel, redefined-outer-name
         except ImportError:
-            pytest.fail("You need to make a urls.py file.")
+            pytest.fail("You need to make a urls.py file in drf_exercise/.")
 
     @pytest.mark.run(order=8)
     @pytest.mark.it('has a Router named router defined in urls.py')
