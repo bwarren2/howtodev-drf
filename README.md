@@ -4,11 +4,15 @@ Work through a series of tests setting up example DRF APIs, culminating in brows
 
 The tests:
 
-![Guidebook](img/guidebook.png)
+![Guidebook](howtodev-server/img/guidebook.png)
 
-![Redocs](img/redocs.png)
+The Redocs:
 
-![Swagger](img/swagger.png)
+![Redocs](howtodev-server/img/redocs.png)
+
+The API dash:
+
+![Swagger](howtodev-server/img/swagger.png)
 
 ## Setup TLDR
 
