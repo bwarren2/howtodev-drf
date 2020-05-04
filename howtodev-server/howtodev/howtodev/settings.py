@@ -132,6 +132,6 @@ REST_FRAMEWORK = {
 }
 
 # This part is for drf-yasg
-# SWAGGER_SETTINGS = {
-#     'DEFAULT_INFO': 'howtodev.urls.info',
-# }
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'howtodev.urls.info',
+}

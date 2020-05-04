@@ -23,7 +23,7 @@ class BaseEmployeeSerializer(serializers.ModelSerializer):  # pylint: disable=mi
 
 
 class EmployeeSerializer(serializers.ModelSerializer):  # pylint: disable=missing-class-docstring
-    snacks = BaseSnackSerializer(many=True, source='snack_set')
+    snacks = BaseSnackSerializer(many=True, source='snack_set', read_only=True)
     has_snacks = serializers.BooleanField()
     num_snacks = serializers.IntegerField()
     has_snacks_serializer_approach = serializers.SerializerMethodField()

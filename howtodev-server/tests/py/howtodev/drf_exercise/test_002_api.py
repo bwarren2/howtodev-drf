@@ -355,3 +355,39 @@ class TestCounts():  # pylint: disable=missing-class-docstring
         response = api_client.post(
             reverse('employee-snacks-list', kwargs={'employee_pk': 1}), {'owner': 2, 'name': 'Chocolate'})
         assert response.json()['owner'] == 1
+
+
+@pytest.mark.django_db(transaction=True, reset_sequences=True)
+@pytest.mark.describe("""
+################################################################################
+## API Doc Generation ##
+Ok, it's hard to test for this.  Basically, find the parts of howtodev/urls.py
+and settings.py that mention drf-yasg, uncomment them, and run these commands:
+python howtodev/manage.py generate_swagger swagger.json
+node_modules/swagger2openapi/swagger2openapi.js swagger.json -y  > openapi3.yaml
+node_modules/redoc-cli/index.js bundle openapi3.yaml
+Then open the generated HTML file.
+################################################################################
+""")
+class TestYASGExplainer():  # pylint: disable=missing-class-docstring
+
+    @pytest.mark.run(order=26)
+    @pytest.mark.it("Right-o")
+    def test_ok(self):  # pylint: disable=missing-function-docstring
+        assert True
+
+
+@pytest.mark.django_db(transaction=True, reset_sequences=True)
+@pytest.mark.describe("""
+################################################################################
+## Swagger doc usage ##
+Now try hitting http://localhost:8080/apidocs/.  Create a superuser (README)
+to get a user you can auth with.
+################################################################################
+""")
+class TestAPIDOCExplainer():  # pylint: disable=missing-class-docstring
+
+    @pytest.mark.run(order=26)
+    @pytest.mark.it("Muy bien")
+    def test_ok(self):  # pylint: disable=missing-function-docstring
+        assert True

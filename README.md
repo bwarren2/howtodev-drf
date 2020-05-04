@@ -1,6 +1,16 @@
-# Readme
+# Howtodev DRF
 
-## TLDR
+Work through a series of tests setting up example DRF APIs, culminating in browsable, automatic Redoc-documentation and an interactive API dashboard.
+
+The tests:
+
+![Guidebook](img/guidebook.png)
+
+![Redocs](img/redocs.png)
+
+![Swagger](img/swagger.png)
+
+## Setup TLDR
 
 Bring it up with `docker-compose up`
 
@@ -10,7 +20,7 @@ Django is served on `http://localhost:8080/`, with the API root at `http://local
 
 If you want to use the vue UI, swap the commented/uncommented commands in `howtodev-vue` in `docker-compose.yml`.
 
-## Database setup
+### Database setup
 
 Bring it up, then
 
@@ -37,7 +47,7 @@ Migrate the DB:
 
 See if it runs at `http://127.0.0.1:8001/`!
 
-## Optional setup
+### Optional setup
 
 Create a superuser if you want one:
 `python howtodev/manage.py createsuperuser` within the server
@@ -45,5 +55,3 @@ Create a superuser if you want one:
 ## Tests
 
 Run with `pytest`
-
-For the challenge questions, run with `py.test -p no:sugar` to see the testdox-style expectations.

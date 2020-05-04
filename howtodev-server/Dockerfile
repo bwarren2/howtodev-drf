@@ -6,6 +6,7 @@ RUN apk update && apk add build-base python-dev py-pip jpeg-dev zlib-dev \
 
 # Install node
 RUN apk add --update nodejs nodejs-npm
+RUN npm install
 
 WORKDIR /usr/src/app
 

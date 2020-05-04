@@ -30,6 +30,7 @@ class SnackModelViewSet(viewsets.ModelViewSet):  # pylint: disable=missing-class
 
 
 class SubSnackModelViewSet(viewsets.ModelViewSet):  # pylint: disable=missing-class-docstring
+    queryset = models.Snack.objects.all()
     serializer_class = serializers.NestedSnackSerializer
     permission_classes = (permissions.IsAuthenticated,)
     pagination_class = pagination.LimitOffsetPagination

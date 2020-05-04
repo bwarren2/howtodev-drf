@@ -26,22 +26,22 @@ urlpatterns = [
 ]
 
 # This part is for drf-yasg
-# if settings.DEBUG:
-#     from drf_yasg import openapi
-#     from drf_yasg.views import get_schema_view
+if settings.DEBUG:
+    from drf_yasg import openapi
+    from drf_yasg.views import get_schema_view
 
-#     info = openapi.Info(
-#         title='My New API',
-#         default_version='v1',
-#         description='My Description',
-#     )
+    info = openapi.Info(
+        title='My New API',
+        default_version='v1',
+        description='My Description',
+    )
 
-#     schema_view = get_schema_view(
-#         info,
-#         public=True,
-#         permission_classes=(permissions.AllowAny,),
-#     )
+    schema_view = get_schema_view(
+        info,
+        public=True,
+        permission_classes=(permissions.AllowAny,),
+    )
 
-#     urlpatterns += [
-#         path(r'^apidocs/$', schema_view.with_ui('swagger', cache_timeout=0), name='swagger'),
-#     ]
+    urlpatterns += [
+        path(r'apidocs/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger'),
+    ]
