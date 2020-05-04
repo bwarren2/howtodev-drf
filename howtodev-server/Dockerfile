@@ -1,7 +1,11 @@
 FROM python:3.8.2-alpine
 
-RUN apk update && apk add build-base python-dev py-pip jpeg-dev zlib-dev openssl-dev gcc libffi-dev postgresql-dev autoconf automake alpine-sdk libtool bash
-ENV LIBRARY_PATH=/lib:/usr/lib
+RUN apk update && apk add build-base python-dev py-pip jpeg-dev zlib-dev \
+    openssl-dev gcc libffi-dev postgresql-dev autoconf automake alpine-sdk \
+    libtool bash curl
+
+# Install node
+RUN apk add --update nodejs nodejs-npm
 
 WORKDIR /usr/src/app
 
@@ -15,4 +19,3 @@ COPY . /usr/src/app
 
 WORKDIR /usr/src/app/howtodev-server
 
-# RUN python manage.py collectstatic --noinput
