@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 2,
 }
 
-
-SWAGGER_SETTINGS = {
-    'DEFAULT_INFO': 'howtodev.urls.info',
-}
+# This part is for drf-yasg
+# SWAGGER_SETTINGS = {
+#     'DEFAULT_INFO': 'howtodev.urls.info',
+# }
