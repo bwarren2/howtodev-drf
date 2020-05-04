@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from rest_framework import permissions
 from django.urls import path, include
 
 
@@ -22,3 +24,24 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/', include('drf_exercise.urls'))
 ]
+
+# This part is for drf-yasg
+# if settings.DEBUG:
+#     from drf_yasg import openapi
+#     from drf_yasg.views import get_schema_view
+
+#     info = openapi.Info(
+#         title='My New API',
+#         default_version='v1',
+#         description='My Description',
+#     )
+
+#     schema_view = get_schema_view(
+#         info,
+#         public=True,
+#         permission_classes=(permissions.AllowAny,),
+#     )
+
+#     urlpatterns += [
+#         path(r'^apidocs/$', schema_view.with_ui('swagger', cache_timeout=0), name='swagger'),
+#     ]

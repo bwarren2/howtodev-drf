@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_exercise',
+    'drf_yasg',
+    'django_extensions',
     'rest_framework',
 ]
 
@@ -127,4 +129,9 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 2,
+}
+
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'howtodev.urls.info',
 }
