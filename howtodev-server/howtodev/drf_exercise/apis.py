@@ -12,7 +12,10 @@ from . import serializers, models
     name='list', decorator=swagger_auto_schema(
         responses={404: serializers.NotFoundSerializer}))
 class EmployeeModelViewSet(viewsets.ModelViewSet):  # pylint: disable=missing-class-docstring
-    "Mydoc"
+    """
+    list: Foo
+    create: Bar
+    """
     queryset = models.Employee.objects.all().prefetch_related('snack_set').annotate(
         has_snacks=Exists(models.Snack.objects.filter(owner=OuterRef('pk'))),
         num_snacks=Count('snack')

@@ -392,7 +392,7 @@ class TestAPIDOCCustomExplainer():
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
-@pytest.mark.describe('Doc annotations on ModelViewSets')
+@pytest.mark.describe('Doc annotations on Employees ModelViewSet')
 class TestDocAnnotation():
 
     @pytest.mark.run(order=28)
@@ -406,3 +406,10 @@ class TestDocAnnotation():
     def test_docstring(self,):
         from drf_exercise.apis import EmployeeModelViewSet
         assert EmployeeModelViewSet.__doc__
+
+    @pytest.mark.run(order=28)
+    @pytest.mark.it("give different test to the list and create methods via the docstring")
+    def test_docstring_different(self,):
+        from drf_exercise.apis import EmployeeModelViewSet
+        assert 'list:' in EmployeeModelViewSet.__doc__
+        assert 'create:' in EmployeeModelViewSet.__doc__
