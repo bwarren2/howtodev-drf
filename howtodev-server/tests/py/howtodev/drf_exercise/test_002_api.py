@@ -1,10 +1,13 @@
 "Testing API structure"
+# pylint: disable=missing-class-docstring missing-function-docstring no-member redefined-outer-name unused-argument invalid-name
+# pylint: disable=invalid-name import-outside-toplevel unused-import c-extension-no-member
 
-import jq
 import rest_framework
 import pytest
 from django.contrib.auth.models import User
 from django.urls import reverse
+import jq
+
 
 try:
     from drf_exercise import urls, apis, models
@@ -44,16 +47,6 @@ def api_client():
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
-@pytest.mark.describe("First off, we are going to make a basic endpoint for showing employees.  ")
-class TestEmployeeExplainer():  # pylint: disable=missing-class-docstring
-
-    @pytest.mark.run(order=5)
-    @pytest.mark.it('OK?  OK!')
-    def test_ok(self):  # pylint: disable=missing-function-docstring
-        assert True
-
-
-@pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe("""
 ################################################################################
 First off, we are going to make a basic endpoint for showing employees.
@@ -63,29 +56,27 @@ https://www.django-rest-framework.org/api-guide/viewsets/
 https://www.django-rest-framework.org/api-guide/routers/
 ################################################################################
 """)
-class TestEmployeeExplainer():  # pylint: disable=missing-class-docstring
-
+class TestEmployeeExplainer():
     @pytest.mark.run(order=5)
     @pytest.mark.it('OK?  OK!')
-    def test_ok(self):  # pylint: disable=missing-function-docstring
+    def test_ok(self):
         assert True
 
 
 @pytest.mark.describe('Basic Employees endpoint setup')
-class TestAPIExists():  # pylint: disable=missing-class-docstring
-
+class TestAPIExists():
     @pytest.mark.run(order=5)
     @pytest.mark.it('has an apis.py file')
-    def test_apipy_exists(self):  # pylint: disable=missing-function-docstring
+    def test_apipy_exists(self):
 
         try:
-            from drf_exercise import apis  # pylint: disable=unused-import, import-outside-toplevel, redefined-outer-name
+            from drf_exercise import apis
         except ImportError:
             pytest.fail("You need to make an `apis.py` file in drf_exercise/.")
 
     @pytest.mark.run(order=6)
     @pytest.mark.it('has a ModelViewSet named EmployeeModelViewSet for Employee in apis.py')
-    def test_employee_modelviewset_exists(self):  # pylint: disable=missing-function-docstring
+    def test_employee_modelviewset_exists(self):
         try:
             assert apis.EmployeeModelViewSet
             assert issubclass(apis.EmployeeModelViewSet, rest_framework.viewsets.ModelViewSet)
@@ -94,16 +85,16 @@ class TestAPIExists():  # pylint: disable=missing-class-docstring
 
     @pytest.mark.run(order=7)
     @pytest.mark.it('has a `urls.py` file in drf_exercise/.')
-    def test_urlspy_exists(self):  # pylint: disable=missing-function-docstring
+    def test_urlspy_exists(self):
 
         try:
-            from drf_exercise import urls  # pylint: disable=unused-import, import-outside-toplevel, redefined-outer-name
+            from drf_exercise import urls
         except ImportError:
             pytest.fail("You need to make a urls.py file in drf_exercise/.")
 
     @pytest.mark.run(order=8)
     @pytest.mark.it('has a Router named router defined in urls.py')
-    def test_urls_router_exists(self):  # pylint: disable=missing-function-docstring
+    def test_urls_router_exists(self):
         try:
             assert urls.router
             assert isinstance(urls.router, rest_framework.routers.SimpleRouter)
@@ -112,13 +103,13 @@ class TestAPIExists():  # pylint: disable=missing-class-docstring
 
     @pytest.mark.run(order=9)
     @pytest.mark.it('has router-shaped urls in the urlpatterns')
-    def test_urls_from_router_exists(self):  # pylint: disable=missing-function-docstring
+    def test_urls_from_router_exists(self):
         assert urls.urlpatterns[0].resolve('employees/')
         assert urls.urlpatterns[0].resolve('employees/1/')
 
     @pytest.mark.run(order=9)
     @pytest.mark.it('uses a browsable API')
-    def test_browsable_router_exists(self):  # pylint: disable=missing-function-docstring
+    def test_browsable_router_exists(self):
         assert isinstance(urls.router, rest_framework.routers.DefaultRouter)
 
 
@@ -129,27 +120,25 @@ Now let's make sure the API works.  Everything here can be done with basic attrs
 like queryset and serializer_class on ModelViewSet
 ################################################################################
 """)
-class TestEmployeeResolveExplainer():  # pylint: disable=missing-class-docstring
-
+class TestEmployeeResolveExplainer():
     @pytest.mark.run(order=10)
     @pytest.mark.it("Let's go")
-    def test_ok(self):  # pylint: disable=missing-function-docstring
+    def test_ok(self):
         assert True
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe('Employees endpoint resolution')
-class TestAPIWorks():  # pylint: disable=missing-class-docstring
-
+class TestAPIWorks():
     @pytest.mark.run(order=10)
     @pytest.mark.it('can be hit')
-    def test_resolve_request(self, user, api_client, employee):  # pylint: disable=missing-function-docstring
+    def test_resolve_request(self, user, api_client, employee):
         api_client.force_authenticate(user)
         assert api_client.get('/api/v1/employees/').status_code == 200
 
     @pytest.mark.run(order=11)
     @pytest.mark.it('returns a list of employees')
-    def test_resolve_employee_list(self, user, api_client, employee):  # pylint: disable=missing-function-docstring
+    def test_resolve_employee_list(self, user, api_client, employee):
         api_client.force_authenticate(user)
         models.Employee.objects.create(name='Ben')
 
@@ -162,7 +151,7 @@ class TestAPIWorks():  # pylint: disable=missing-class-docstring
 
     @pytest.mark.run(order=12)
     @pytest.mark.it('returns a specific employee')
-    def test_resolve_employee_detail(self, user, api_client, employee):  # pylint: disable=missing-function-docstring
+    def test_resolve_employee_detail(self, user, api_client, employee):
         api_client.force_authenticate(user)
         response = api_client.get(reverse('employee-detail', args=(1,))).json()
         jq_filtered_response = jq.compile('. as $data | {name: $data.name}').input(response).first()
@@ -171,12 +160,12 @@ class TestAPIWorks():  # pylint: disable=missing-class-docstring
 
     @pytest.mark.run(order=13)
     @pytest.mark.it('requires login')
-    def test_resolve_needs_login(self, api_client, employee):  # pylint: disable=missing-function-docstring
+    def test_resolve_needs_login(self, api_client, employee):
         assert api_client.get(reverse('employee-detail', args=(1,))).status_code == 403
 
     @pytest.mark.run(order=14)
     @pytest.mark.it('supports limit-offset pagination with page size 2')
-    def test_employee_pagination(self, user, api_client):  # pylint: disable=missing-function-docstring
+    def test_employee_pagination(self, user, api_client):
         models.Employee.objects.create(name='Ben')
         models.Employee.objects.create(name='Jason')
         models.Employee.objects.create(name='John')
@@ -186,7 +175,7 @@ class TestAPIWorks():  # pylint: disable=missing-class-docstring
 
     @pytest.mark.run(order=15)
     @pytest.mark.it('supports filtering on name')
-    def test_employee_filtering(self, user, api_client):  # pylint: disable=missing-function-docstring
+    def test_employee_filtering(self, user, api_client):
         models.Employee.objects.create(name='Ben')
         models.Employee.objects.create(name='John')
         api_client.force_authenticate(user)
@@ -202,39 +191,36 @@ here, so we need a Snack endpoint as well.  It's much like the Employee one for
 now.
 ################################################################################
 """)
-class TestSnackResolveExplainer():  # pylint: disable=missing-class-docstring
-
+class TestSnackResolveExplainer():
     @pytest.mark.run(order=16)
     @pytest.mark.it("I'm ready")
-    def test_ok(self):  # pylint: disable=missing-function-docstring
+    def test_ok(self):
         assert True
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe('`Snack`s endpoint')
-class TestSnacksEndpoint():  # pylint: disable=missing-class-docstring
-
+class TestSnacksEndpoint():
     @pytest.mark.run(order=16)
     @pytest.mark.it('can be hit')
-    def test_resolve_request(self, user, api_client):  # pylint: disable=missing-function-docstring
+    def test_resolve_request(self, user, api_client):
         api_client.force_authenticate(user)
         assert api_client.get('/api/v1/snacks/').status_code == 200
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe('`Snack`s ')
-class TestRelationshipsWork():  # pylint: disable=missing-class-docstring
-
+class TestRelationshipsWork():
     @pytest.mark.run(order=17)
     @pytest.mark.it('have `owner` as a PK in their serialization')
-    def test_owner_pk(self, user, snack_with_owner, api_client):  # pylint: disable=missing-function-docstring
+    def test_owner_pk(self, user, snack_with_owner, api_client):
         api_client.force_authenticate(user)
         response = api_client.get(reverse('snack-list')).json()
         assert response['results'][0]['owner'] == 1
 
     @pytest.mark.run(order=18)
     @pytest.mark.it('have `owner_data` in their serialization (use `source=`)')
-    def test_owner_data(self, user, snack_with_owner, api_client):  # pylint: disable=missing-function-docstring
+    def test_owner_data(self, user, snack_with_owner, api_client):
         api_client.force_authenticate(user)
         response = api_client.get(reverse('snack-list')).json()
         assert response['results'][0]['owner'] == 1
@@ -242,11 +228,10 @@ class TestRelationshipsWork():  # pylint: disable=missing-class-docstring
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe('`Employee`s ')
-class TestEmployeeSnacks():  # pylint: disable=missing-class-docstring
-
+class TestEmployeeSnacks():
     @pytest.mark.run(order=19)
     @pytest.mark.it('have a list of snacks in their serialization')
-    def test_snack_list(self, user, owner_with_snacks, api_client):  # pylint: disable=missing-function-docstring
+    def test_snack_list(self, user, owner_with_snacks, api_client):
         api_client.force_authenticate(user)
         response = api_client.get(reverse('employee-detail', args=(1,))).json()
         assert len(response['snacks']) == 3
@@ -261,73 +246,69 @@ problems when you pull 100 objects and they each run a couple queries.  This
 part is solving those problems by optimizing querysets.
 ################################################################################
 """)
-class TestSnackResolveExplainer():  # pylint: disable=missing-class-docstring
-
+class TestQueryExplainer():
     @pytest.mark.run(order=20)
     @pytest.mark.it("Lemme at em")
-    def test_ok(self):  # pylint: disable=missing-function-docstring
+    def test_ok(self):
         assert True
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe('`Query Scaling ')
-class TestQueryScaling():  # pylint: disable=missing-class-docstring
-
+class TestQueryScaling():
     @pytest.mark.run(order=20)
     @pytest.mark.it("`snacks` api doesn't add queries with additional objects")
-    def test_snack_scaling(self, user, django_assert_num_queries, api_client):  # pylint: disable=missing-function-docstring
+    def test_snack_scaling(self, user, django_assert_num_queries, api_client):
         api_client.force_authenticate(user)
 
         jason = models.Employee.objects.create(name='Jason')
         models.Snack.objects.create(name='Candy Cane', owner=jason)
 
-        with django_assert_num_queries(2) as captured:
-            response = api_client.get(reverse('snack-list')).json()
+        with django_assert_num_queries(2):
+            api_client.get(reverse('snack-list')).json()
 
     @pytest.mark.run(order=21)
     @pytest.mark.it("`employees` api doesn't add queries with additional objects")
-    def test_employee_scaling(self, user, django_assert_num_queries, api_client):  # pylint: disable=missing-function-docstring
+    def test_employee_scaling(self, user, django_assert_num_queries, api_client):
         api_client.force_authenticate(user)
 
         jason = models.Employee.objects.create(name='Jason')
         models.Snack.objects.create(name='Candy Cane', owner=jason)
 
         john = models.Employee.objects.create(name='John')
-        models.Snack.objects.create(name='Clementine', owner=jason)
+        models.Snack.objects.create(name='Clementine', owner=john)
 
-        with django_assert_num_queries(3) as captured:
-            response = api_client.get(reverse('employee-list')).json()
+        with django_assert_num_queries(3):
+            api_client.get(reverse('employee-list')).json()
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe('Count/Exist attributes ')
-class TestCounts():  # pylint: disable=missing-class-docstring
-
+class TestCounts():
     @pytest.mark.run(order=22)
     @pytest.mark.it("has_snack and num_snacks exist for `Employee` serialization")
-    def test_snack_annotations(self, user, owner_with_snacks, api_client):  # pylint: disable=missing-function-docstring
+    def test_snack_annotations(self, user, owner_with_snacks, api_client):
         api_client.force_authenticate(user)
 
         response = api_client.get(reverse('employee-detail', args=(1,))).json()
         assert response['num_snacks'] == 3
-        assert response['has_snacks'] == True
+        assert response['has_snacks']
 
     @pytest.mark.run(order=23)
     @pytest.mark.it("has_snacks_serializer_approach exists on `Employee`")
-    def test_snack_serializermethod(self, user, owner_with_snacks, api_client):  # pylint: disable=missing-function-docstring
+    def test_snack_serializermethod(self, user, owner_with_snacks, api_client):
         api_client.force_authenticate(user)
 
         response = api_client.get(reverse('employee-detail', args=(1,))).json()
-        assert response['has_snacks_serializer_approach'] == True
+        assert response['has_snacks_serializer_approach']
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
 @pytest.mark.describe('Nested Snack Router')
-class TestCounts():  # pylint: disable=missing-class-docstring
-
+class TestNested():
     @pytest.mark.run(order=24)
     @pytest.mark.it("exists in urls with name `employee-snacks-list`")
-    def test_snack_nesting(self, user, owner_with_snacks, api_client):  # pylint: disable=missing-function-docstring
+    def test_snack_nesting(self, user, owner_with_snacks, api_client):
         api_client.force_authenticate(user)
 
         response = api_client.get(reverse('employee-snacks-list', kwargs={'employee_pk': 1}))
@@ -335,7 +316,7 @@ class TestCounts():  # pylint: disable=missing-class-docstring
 
     @pytest.mark.run(order=24)
     @pytest.mark.it("on GET, restricts results to the URL-matching owner")
-    def test_snack_get(self, user, api_client):  # pylint: disable=missing-function-docstring
+    def test_snack_get(self, user, api_client):
         api_client.force_authenticate(user)
         jason = models.Employee.objects.create(name='Jason')
         models.Snack.objects.create(name='Candy Cane', owner=jason)
@@ -348,7 +329,7 @@ class TestCounts():  # pylint: disable=missing-class-docstring
 
     @pytest.mark.run(order=25)
     @pytest.mark.it("on POST, gets the employee ID to use from the url")
-    def test_snack_post(self, user, owner_with_snacks, api_client):  # pylint: disable=missing-function-docstring
+    def test_snack_post(self, user, owner_with_snacks, api_client):
         api_client.force_authenticate(user)
         models.Employee.objects.create(name='John')
 
@@ -369,11 +350,11 @@ node_modules/redoc-cli/index.js bundle openapi3.yaml
 Then open the generated HTML file.
 ################################################################################
 """)
-class TestYASGExplainer():  # pylint: disable=missing-class-docstring
+class TestYASGExplainer():
 
     @pytest.mark.run(order=26)
     @pytest.mark.it("Right-o")
-    def test_ok(self):  # pylint: disable=missing-function-docstring
+    def test_ok(self):
         assert True
 
 
@@ -385,9 +366,50 @@ Now try hitting http://localhost:8080/apidocs/.  Create a superuser (README)
 to get a user you can auth with.
 ################################################################################
 """)
-class TestAPIDOCExplainer():  # pylint: disable=missing-class-docstring
+class TestAPIDOCExplainer():
 
     @pytest.mark.run(order=26)
     @pytest.mark.it("Muy bien")
-    def test_ok(self):  # pylint: disable=missing-function-docstring
+    def test_ok(self):
         assert True
+
+
+@pytest.mark.django_db(transaction=True, reset_sequences=True)
+@pytest.mark.describe("""
+################################################################################
+## APIDoc Customization ##
+So, the defaults DRF + Swagger + Redoc generates are ok, but we can make them
+better.  We can provide different response codes and serializers, change the
+documentation, and provide more explanation about around parameters.
+################################################################################
+""")
+class TestAPIDOCCustomExplainer():
+
+    @pytest.mark.run(order=27)
+    @pytest.mark.it("Tell me more")
+    def test_ok(self):
+        assert True
+
+
+@pytest.mark.django_db(transaction=True, reset_sequences=True)
+@pytest.mark.describe('Doc annotations on Employees ModelViewSet')
+class TestDocAnnotation():
+
+    @pytest.mark.run(order=28)
+    @pytest.mark.it("add a 404 annotation to the Employees endpoint")
+    def test_404_annotation(self,):
+        from drf_exercise.apis import EmployeeModelViewSet
+        assert EmployeeModelViewSet.list._swagger_auto_schema['responses'][404]
+
+    @pytest.mark.run(order=28)
+    @pytest.mark.it("have a docstring on the Employees endpoint to show in the docs")
+    def test_docstring(self,):
+        from drf_exercise.apis import EmployeeModelViewSet
+        assert EmployeeModelViewSet.__doc__
+
+    @pytest.mark.run(order=28)
+    @pytest.mark.it("give different test to the list and create methods via the docstring")
+    def test_docstring_different(self,):
+        from drf_exercise.apis import EmployeeModelViewSet
+        assert 'list:' in EmployeeModelViewSet.__doc__
+        assert 'create:' in EmployeeModelViewSet.__doc__

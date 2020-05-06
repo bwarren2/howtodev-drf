@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+python howtodev/manage.py generate_swagger swagger.json
+node_modules/swagger2openapi/swagger2openapi.js swagger.json -y  > openapi3.yaml
+rm swagger.json
+node_modules/redoc-cli/index.js bundle openapi3.yaml
+rm openapi3.yaml
