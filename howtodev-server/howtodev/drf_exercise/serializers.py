@@ -49,3 +49,8 @@ class NestedSnackSerializer(serializers.ModelSerializer):  # pylint: disable=mis
     class Meta:  # pylint: disable=missing-class-docstring
         model = models.Snack
         fields = ('name', 'owner')
+
+
+class NotFoundSerializer(serializers.Serializer):  # pylint: disable=missing-class-docstring
+
+    msg = serializers.CharField(default='Not Found.')

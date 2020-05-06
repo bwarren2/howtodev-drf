@@ -20,6 +20,8 @@ The API dash:
 
 ![Swagger](howtodev-server/img/swagger.png)
 
+Based on [https://github.com/bwarren2/howtodev](howtodev).
+
 ## Setup TLDR
 
 Bring it up with `docker-compose up -d`
