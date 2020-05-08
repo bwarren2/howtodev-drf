@@ -7,10 +7,10 @@ import pytest
 from django.contrib.auth.models import User
 from django.urls import reverse
 import jq
-
+from drf_exercise import models
 
 try:
-    from drf_exercise import urls, apis, models
+    from drf_exercise import urls, apis
 except ImportError:
     pass
 
