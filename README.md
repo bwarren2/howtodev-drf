@@ -35,3 +35,5 @@ Vue is served on `http://localhost:8001/`
 Django is served on `http://localhost:8080/`, with the API root at `http://localhost:8080/api/`.
 
 If you want to use the vue UI, swap the commented/uncommented commands in `howtodev-vue` in `docker-compose.yml`.
+
+Run tests within the server container (`docker exec -it howtodev-server bash`) with `pytest`!
