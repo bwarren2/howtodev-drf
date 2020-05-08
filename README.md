@@ -24,11 +24,11 @@ Based on [https://github.com/bwarren2/howtodev](howtodev).
 
 ## Setup TLDR
 
+Bring it up with `docker-compose up -d`
+
 Migrate the DB: `docker exec -it howtodev-server python howtodev/manage.py migrate`
 
 You now have a Django admin user `admin` with password `abadpass`.
-
-Bring it up with `docker-compose up -d`
 
 Vue is served on `http://localhost:8001/`
 
