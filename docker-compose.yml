@@ -9,6 +9,10 @@ services:
     restart: always
     volumes:
       - howtodev-database:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=abadpass
+      - POSTGRES_USER=howtodev
+      - POSTGRES_DB=howtodev
 
   howtodev-server:
     build:

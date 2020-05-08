@@ -9,7 +9,7 @@ ENV PATH /usr/src/app/node_module/.bin:$PATH
 
 COPY package.json /usr/src/app/package.json
 
-RUN npm install
-RUN npm install -g @vue/cli
+RUN yarn install
+RUN yarn global add @vue/cli
 
 COPY . /usr/src/app
