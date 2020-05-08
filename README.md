@@ -35,7 +35,7 @@ If you want to use the vue UI, swap the commented/uncommented commands in `howto
 ### Database setup
 
 Migrate the DB:
-`python howtodev/manage.py migrate`
+`docker exec -it howtodev-server python howtodev/manage.py migrate`
 
 See if it runs at `http://127.0.0.1:8001/`!
 

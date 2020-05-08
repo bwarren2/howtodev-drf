@@ -12,7 +12,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=abadpass
       - POSTGRES_USER=howtodev
-      - POSTGRES_DB=howtodev
+      - POSTGRES_DB=howtodev-drf
 
   howtodev-server:
     build:
