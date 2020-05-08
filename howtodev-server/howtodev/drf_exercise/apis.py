@@ -45,7 +45,9 @@ class SubSnackModelViewSet(viewsets.ModelViewSet):  # pylint: disable=missing-cl
     filterset_fields = ['name', ]
 
     def get_queryset(self):
-        return models.Snack.objects.filter(owner__pk=self.kwargs['employee_pk']).select_related('owner')
+        return models.Snack.objects.filter(
+            # owner__pk=self.kwargs['employee_pk']
+        ).select_related('owner')
 
     def get_serializer(self, *args, **kwargs):
 
