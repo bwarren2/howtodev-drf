@@ -34,26 +34,6 @@ If you want to use the vue UI, swap the commented/uncommented commands in `howto
 
 ### Database setup
 
-Bring it up, then
-
-`docker exec -it howtodev-database bash`
-
-To get into a container, and
-
-`psql -U postgres`
-
-to get a postgres shell.
-
-Create the DB:
-`createdb -U postgres howtodev`
-
-Create the user:
-`create user howtodev with superuser;`
-`alter user howtodev with password 'abadpass';`
-
-Close out, and go into the server:
-`docker exec -it howtodev-server bash`
-
 Migrate the DB:
 `python howtodev/manage.py migrate`
 
