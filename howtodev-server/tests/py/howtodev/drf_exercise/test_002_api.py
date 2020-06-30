@@ -325,6 +325,7 @@ class TestNested():
         models.Snack.objects.create(name='Apple', owner=john)
 
         response = api_client.get(reverse('employee-snacks-list', kwargs={'employee_pk': 1}))
+
         assert len(response.json()['results']) == 1
 
     @pytest.mark.run(order=25)
