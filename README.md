@@ -26,6 +26,8 @@ Based on [https://github.com/bwarren2/howtodev](howtodev).
 
 Bring it up with `docker-compose up -d`
 
+Checkout the `feature/build-tests` branch.  (One of the requirements for the next step is kept out of master for a test.)
+
 Migrate the DB: `docker exec -it howtodev-server python howtodev/manage.py migrate`
 
 You now have a Django admin user `admin` with password `abadpass`.
