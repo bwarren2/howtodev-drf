@@ -101,6 +101,16 @@ class TestAPIExists():
         except AttributeError:
             pytest.fail("You need a variable named router that is a DRF Router subclass in `urls.py`")
 
+    @pytest.mark.it('has the EmployeeModelViewSet registered with the router')
+    def test_urls_from_router_exists(self):
+        import pdb; pdb.set_trace()
+        try:
+            assert urls.router
+            assert isinstance(urls.router, rest_framework.routers.SimpleRouter)
+        except AttributeError:
+            pytest.fail("You need a variable named router that is a DRF Router subclass in `urls.py`")
+
+
     @pytest.mark.run(order=9)
     @pytest.mark.it('has router-shaped urls in the urlpatterns')
     def test_urls_from_router_exists(self):
