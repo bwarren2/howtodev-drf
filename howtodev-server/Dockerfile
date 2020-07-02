@@ -17,5 +17,6 @@ RUN pip install -r requirements.txt
 
 COPY . /usr/src/app
 
-WORKDIR /usr/src/app/howtodev-server
+WORKDIR /usr/src/app/howtodev
 
+CMD python manage.py runserver 0.0.0.0:8000
