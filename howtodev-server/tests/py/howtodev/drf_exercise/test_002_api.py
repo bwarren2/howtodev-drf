@@ -75,15 +75,6 @@ class TestAPIExists():
             pytest.fail("You need to make an `apis.py` file in drf_exercise/.")
 
     @pytest.mark.run(order=6)
-    @pytest.mark.it('has a ModelViewSet named EmployeeModelViewSet for Employee in apis.py')
-    def test_employee_modelviewset_exists(self):
-        try:
-            assert apis.EmployeeModelViewSet
-            assert issubclass(apis.EmployeeModelViewSet, rest_framework.viewsets.ModelViewSet)
-        except AttributeError:
-            pytest.fail("You need a ModelViewSet named EmployeeModelViewSet in apis.py in drf_exercise/")
-
-    @pytest.mark.run(order=7)
     @pytest.mark.it('has a `urls.py` file in drf_exercise/.')
     def test_urlspy_exists(self):
 
@@ -91,6 +82,15 @@ class TestAPIExists():
             from drf_exercise import urls
         except ImportError:
             pytest.fail("You need to make a urls.py file in drf_exercise/.")
+
+    @pytest.mark.run(order=7)
+    @pytest.mark.it('has a ModelViewSet named EmployeeModelViewSet for Employee in apis.py')
+    def test_employee_modelviewset_exists(self):
+        try:
+            assert apis.EmployeeModelViewSet
+            assert issubclass(apis.EmployeeModelViewSet, rest_framework.viewsets.ModelViewSet)
+        except AttributeError:
+            pytest.fail("You need a ModelViewSet named EmployeeModelViewSet in apis.py in drf_exercise/")
 
     @pytest.mark.run(order=8)
     @pytest.mark.it('has a Router named router defined in urls.py')
