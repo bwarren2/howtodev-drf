@@ -20,7 +20,7 @@ The API dash:
 
 ![Swagger](howtodev-server/img/swagger.png)
 
-Based on [https://github.com/bwarren2/howtodev](howtodev).
+Based on [howtodev](https://github.com/bwarren2/howtodev).
 
 ## Setup TLDR
 
