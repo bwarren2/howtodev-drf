@@ -63,10 +63,10 @@ class TestEmployeeExplainer():
         assert True
 
 
-@pytest.mark.describe('Basic Employees endpoint setup')
+@pytest.mark.describe('drf_exercise/ has')
 class TestAPIExists():
     @pytest.mark.run(order=5)
-    @pytest.mark.it('has an apis.py file')
+    @pytest.mark.it('an `apis.py` file.')
     def test_apipy_exists(self):
 
         try:
@@ -75,13 +75,24 @@ class TestAPIExists():
             pytest.fail("You need to make an `apis.py` file in drf_exercise/.")
 
     @pytest.mark.run(order=6)
-    @pytest.mark.it('has a `urls.py` file in drf_exercise/.')
+    @pytest.mark.it('a `urls.py` file.')
     def test_urlspy_exists(self):
 
         try:
             from drf_exercise import urls
         except ImportError:
             pytest.fail("You need to make a urls.py file in drf_exercise/.")
+
+@pytest.mark.describe('You may want this: https://www.django-rest-framework.org/api-guide/viewsets/')
+class TestAPIMVSMsg():
+
+    @pytest.mark.run(order=7)
+    @pytest.mark.it('I was elected to lead, not to read.')
+    def test_msg(self):
+        assert True
+
+@pytest.mark.describe('Basic ModelViewSet configuration')
+class TestMVSConfig():
 
     @pytest.mark.run(order=7)
     @pytest.mark.it('has a ModelViewSet named EmployeeModelViewSet for Employee in apis.py')
@@ -92,6 +103,19 @@ class TestAPIExists():
         except AttributeError:
             pytest.fail("You need a ModelViewSet named EmployeeModelViewSet in apis.py in drf_exercise/")
 
+
+@pytest.mark.describe('You may want this: https://www.django-rest-framework.org/api-guide/routers/')
+class TestAPIRouterMsg():
+
+    @pytest.mark.run(order=7)
+    @pytest.mark.it('You are not the boss of me.')
+    def test_msg(self):
+        assert True
+
+
+@pytest.mark.describe('Basic Router configuration')
+class TestBasicRouterConfig():
+
     @pytest.mark.run(order=8)
     @pytest.mark.it('has a Router named router defined in urls.py')
     def test_urls_router_exists(self):
@@ -101,14 +125,14 @@ class TestAPIExists():
         except AttributeError:
             pytest.fail("You need a variable named router that is a DRF Router subclass in `urls.py`")
 
+    @pytest.mark.run(order=8)
     @pytest.mark.it('has the EmployeeModelViewSet registered with the router')
-    def test_urls_from_router_exists(self):
-        import pdb; pdb.set_trace()
+    def test_router_has_registered_MVS(self):
         try:
             assert urls.router
-            assert isinstance(urls.router, rest_framework.routers.SimpleRouter)
+            assert urls.router.registry[0][1].__name__ == 'EmployeeModelViewSet'
         except AttributeError:
-            pytest.fail("You need a variable named router that is a DRF Router subclass in `urls.py`")
+            pytest.fail("You to register your EmployeeModelViewSet with the router (first)")
 
 
     @pytest.mark.run(order=9)
