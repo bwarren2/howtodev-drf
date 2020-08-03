@@ -103,7 +103,6 @@ class TestAPIExists():
 
     @pytest.mark.it('has the EmployeeModelViewSet registered with the router')
     def test_urls_from_router_exists(self):
-        import pdb; pdb.set_trace()
         try:
             assert urls.router
             assert isinstance(urls.router, rest_framework.routers.SimpleRouter)
@@ -151,13 +150,9 @@ class TestAPIWorks():
     def test_resolve_employee_list(self, user, api_client, employee):
         api_client.force_authenticate(user)
         models.Employee.objects.create(name='Ben')
-
         response = api_client.get(reverse('employee-list')).json()
-        pagination_removed_response = response['results']
-        jq_pagination_removed = jq.compile('.results[] as $data | {name: $data.name}').input(response).all()
-
         expected = [{'name': 'John'}, {'name': 'Ben'}]
-        assert response == expected or pagination_removed_response == expected or jq_pagination_removed == expected
+        assert response == expected
 
     @pytest.mark.run(order=12)
     @pytest.mark.it('returns a specific employee')
